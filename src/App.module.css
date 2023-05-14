@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.article {
+  flex: 90.75;
+}

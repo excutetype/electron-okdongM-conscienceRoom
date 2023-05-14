@@ -1,0 +1,56 @@
+{
+  "main": "public/main.js",
+  "homepage": "./",
+  "name": "conscience-room",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "concurrently": "^8.0.1",
+    "cross-env": "^7.0.3",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "electron-unhandled": "^4.0.1",
+    "mysql2": "^3.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-scripts": "5.0.1",
+    "wait-on": "^7.0.1",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "react:start": "react-scripts start",
+    "electron:start": "wait-on tcp:3000 && electron .",
+    "both:start": "concurrently -k \"cross-env BROWSER=none yarn react:start\" \"yarn electron:start\"",
+    "react:build": "react-scripts build",
+    "electron:build": "yarn react:build && electron-builder -c.extraMetadata.main=build/main.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^24.3.0",
+    "electron-builder": "^23.6.0"
+  }
+}

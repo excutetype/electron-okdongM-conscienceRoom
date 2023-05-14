@@ -1,0 +1,18 @@
+.productManager {
+  grid-area: product-manager;
+  width: 890px;
+  height: 850px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 0px 18px;
+}
+
+.title {
+  font-size: 38px;
+  font-family: "maplestoryBold";
+  margin-bottom: 25px;
+  padding: 5px 0px 20px 5px;
+  border-bottom: 1px solid #c5c5c5;
+  color: #2e2e2e;
+}

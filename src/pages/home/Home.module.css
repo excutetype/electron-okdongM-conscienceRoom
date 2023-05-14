@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 85px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 700px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 0px 18px;
+}
+
+.image {
+  margin-bottom: 10px;
+  filter: invert(0.9);
+}
+
+.message {
+  font-size: 42px;
+  font-family: "maplestoryBold";
+  color: #e2e2e2e2;
+}

@@ -1,0 +1,27 @@
+.headerButton {
+  padding: 10px 12px 10px 12px;
+  background: none;
+  border: none;
+  border: 1px solid #4e73df;
+  border-radius: 100%;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 0px 18px;
+  cursor: pointer;
+}
+
+.headerButton:hover {
+  background-color: #4e73df;
+}
+
+.headerButton:hover,
+.headerButton:focus {
+  outline: none;
+}
+
+.image {
+  width: 25px;
+  filter: invert(0);
+}
+
+.headerButton:hover .image {
+  filter: invert(1);
+}
