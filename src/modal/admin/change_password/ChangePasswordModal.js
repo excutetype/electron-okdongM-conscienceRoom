@@ -27,7 +27,7 @@ function ChangePasswordModal() {
       {({ setModal }) => {
         return (
           <Modal
-            data={{ isOpen: true }}
+            isOpen={true}
             style={{
               content: {
                 width: "450px",

@@ -1,39 +1,31 @@
-import SettingContext from "context/page/SettingPage";
-import Modal from "components/modal/Modal";
+import SystemModal from "components/system_modal/SystemModal";
+import HoverableButton from "components/hoverable_button/HoverableButton";
 import styles from "./SuccessApplyModal.module.css";
 
-function SuccessApplyModal() {
+function SuccessApplyModal({ setIsSuccessfulApply }) {
   return (
-    <SettingContext.Consumer>
-      {({ showSuccessModal, setShowSuccessModal }) => {
-        return (
-          <Modal
-            style={{
-              content: {
-                width: "350px",
-                height: "fit-content",
-              },
-            }}
-            data={{ isOpen: showSuccessModal }}
-          >
-            <div className={styles.successApplyModal}>
-              <div className={styles.headerDesign} />
-              <div className={styles.article}>설정이 변경되었습니다.</div>
-              <div className={styles.submitBox}>
-                <button
-                  className={styles.submit}
-                  onClick={() => {
-                    setShowSuccessModal(false);
-                  }}
-                >
-                  확인
-                </button>
-              </div>
-            </div>
-          </Modal>
-        );
+    <SystemModal.Body
+      isOpen={true}
+      style={{
+        content: {
+          width: "400px",
+          height: "fit-content",
+        },
       }}
-    </SettingContext.Consumer>
+    >
+      <div className={styles.article}>설정이 저장되었습니다.</div>
+      <SystemModal.Footer>
+        <HoverableButton
+          size={20.8}
+          color="#4e73df"
+          onClick={() => {
+            setIsSuccessfulApply(false);
+          }}
+        >
+          확인
+        </HoverableButton>
+      </SystemModal.Footer>
+    </SystemModal.Body>
   );
 }
 

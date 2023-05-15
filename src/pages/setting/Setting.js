@@ -1,65 +1,82 @@
 import { useState, useEffect } from "react";
-import SettingContext from "context/page/SettingPage";
 import ipcSend from "api/ipcSend";
 import Category from "layout/setting/category/Category";
-import CategorySelection from "layout/setting/category/CategorySelection";
-import DatabaseSettingPage from "layout/setting/setting_page/DatabaseSettingPage";
-import ApplyButton from "layout/setting/apply_button/ApplyButton";
+import SelectableText from "components/selectableText/SelectableText";
+import SettingPage from "layout/setting/setting_page/SettingPage";
+import GeneralPage from "layout/setting/setting_page/GeneralPage";
+import ApplyButtonBox from "layout/setting/apply_button/ApplyButtonBox";
+import HoverableButton from "components/hoverable_button/HoverableButton";
 import SuccessApplyModal from "modal/setting/SuccessApplyModal";
 import styles from "./Setting.module.css";
 
 function Setting() {
-  const [settingPage, setSettingPage] = useState("normal");
+  const [settingPage, setSettingPage] = useState("general");
   const [settingValue, setSettingValue] = useState({});
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isSuccessfulApply, setIsSuccessfulApply] = useState(false);
 
   useEffect(() => {
     (async () => {
-      // eslint-disable-next-line default-case
-      switch (settingPage) {
-        case "database":
-          setSettingValue(await ipcSend("electronStore-get-database-setting"));
-          break;
-      }
+      setSettingValue(
+        await ipcSend("electronStore-get", {
+          key: settingPage,
+          nonexistentKeyValue: {},
+        })
+      );
     })();
   }, [settingPage]);
+
+  const settingPageEnum = {
+    general: <GeneralPage values={settingValue} setter={setSettingValue} />,
+  };
 
   return (
     <div className={styles.root}>
       <div className={styles.setting}>
-        <SettingContext.Provider
-          value={{
-            settingPage,
-            setSettingPage,
-            settingValue,
-            setSettingValue,
-            showSuccessModal,
-            setShowSuccessModal,
-          }}
-        >
-          <Category>
-            <CategorySelection data={{ name: "일반", pageName: "normal" }} />
-            <CategorySelection
-              data={{ name: "데이터베이스", pageName: "database" }}
-            />
-          </Category>
-          <div className={styles.settingPage}>
-            {getSettingPage(settingPage)}
-          </div>
-          <ApplyButton />
-          <SuccessApplyModal />
-        </SettingContext.Provider>
+        <Category>
+          <SelectableText
+            size={"2rem"}
+            selected={settingPage === "general"}
+            onClick={() => {
+              setSettingPage("normal");
+            }}
+          >
+            일반
+          </SelectableText>
+        </Category>
+        <SettingPage>{settingPageEnum[settingPage]}</SettingPage>
+        <ApplyButtonBox>
+          <HoverableButton
+            size={20.8}
+            color="#4e73df"
+            onClick={() => {
+              applyButtonClickHandler(
+                settingPage,
+                settingValue,
+                setIsSuccessfulApply
+              );
+            }}
+          >
+            저장
+          </HoverableButton>
+        </ApplyButtonBox>
+        {isSuccessfulApply && (
+          <SuccessApplyModal setIsSuccessfulApply={setIsSuccessfulApply} />
+        )}
       </div>
     </div>
   );
 }
 
-function getSettingPage(page) {
-  // eslint-disable-next-line default-case
-  switch (page) {
-    case "database":
-      return <DatabaseSettingPage />;
-  }
+function applyButtonClickHandler(
+  settingPage,
+  settingValue,
+  setIsSuccessfulApply
+) {
+  ipcSend("electronStore-set", { key: settingPage, value: settingValue }).then(
+    () => {
+      setIsSuccessfulApply(true);
+    }
+  );
 }
 
 export default Setting;

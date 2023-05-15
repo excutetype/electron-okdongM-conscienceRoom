@@ -1,6 +1,7 @@
 import ReactModal from "react-modal";
+import styles from "./SystemModal.module.css";
 
-function Modal({ isOpen, style, children }) {
+function Body({ isOpen, style, children }) {
   const basicStyle = {
     content: {
       top: "50%",
@@ -17,9 +18,18 @@ function Modal({ isOpen, style, children }) {
       isOpen={isOpen}
       style={{ content: { ...basicStyle.content, ...style.content } }}
     >
-      {children}
+      <div className={styles.body}>
+        <div className={styles.headerDesign} />
+        {children}
+      </div>
     </ReactModal>
   );
 }
 
-export default Modal;
+function Footer({ children }) {
+  return <div className={styles.footer}>{children}</div>;
+}
+
+const SystemModal = { Body, Footer };
+
+export default SystemModal;

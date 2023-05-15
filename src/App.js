@@ -12,7 +12,6 @@ import styles from "./App.module.css";
 function App() {
   const [page, setPage] = useState("home");
   const [needPassword, setNeedPassword] = useState(false);
-
   return (
     <AppContext.Provider
       value={{ page, setPage, needPassword, setNeedPassword }}

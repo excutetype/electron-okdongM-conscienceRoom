@@ -28,6 +28,7 @@ function ErrorModal() {
 
   return (
     <Modal
+      isOpen={showModal}
       style={{
         content: {
           width: "500px",
@@ -35,7 +36,6 @@ function ErrorModal() {
           minHeight: "200px",
         },
       }}
-      data={{ isOpen: showModal }}
     >
       <div className={styles.errorModal}>
         <div className={styles.headerDesign} />

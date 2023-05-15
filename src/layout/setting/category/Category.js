@@ -1,11 +1,7 @@
 import styles from "./Category.module.css";
 
 function Category({ children }) {
-  return (
-    <div className={styles.root}>
-      <div className={styles.category}>{children}</div>
-    </div>
-  );
+  return <div className={styles.category}>{children}</div>;
 }
 
 export default Category;

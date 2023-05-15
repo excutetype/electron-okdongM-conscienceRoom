@@ -3,42 +3,23 @@ const store = new ElectronStore();
 const ElectronStoreError = require("../../error/custom_error/ElectronStoreError");
 
 const electronStoreService = {
-  set: {
-    databaseSetting: (settingValue) => {
-      try {
-        store.set("database-setting", JSON.stringify(settingValue));
-      } catch {
-        throw new ElectronStoreError.setStoreError();
-      }
-    },
+  set: (key, value) => {
+    try {
+      store.set(key, JSON.stringify(value));
+    } catch {
+      throw new ElectronStoreError.setStoreError();
+    }
   },
-  get: {
-    databaseSetting: () => {
-      try {
-        const stringifiedSetting = store.get("database-setting");
-
-        if (!stringifiedSetting) {
-          return {};
-        }
-
-        return JSON.parse(stringifiedSetting);
-      } catch {
-        throw new ElectronStoreError.getStoreError();
+  get: (key, nonexistentKeyValue) => {
+    try {
+      const value = store.get(key);
+      if (!value) {
+        return nonexistentKeyValue;
       }
-    },
-    password: () => {
-      try {
-        const stringifiedPassword = store.get("password");
-
-        if (!stringifiedPassword) {
-          return "";
-        }
-
-        return JSON.parse(stringifiedPassword);
-      } catch {
-        throw new ElectronStoreError.getStoreError();
-      }
-    },
+      return JSON.parse(value);
+    } catch {
+      throw new ElectronStoreError.setStoreError();
+    }
   },
 };
 

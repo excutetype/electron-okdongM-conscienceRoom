@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AppContext from "context/app/AppContext";
-import Modal from "components/modal/Modal";
+import SystemModal from "components/system_modal/SystemModal";
+import HoverableButton from "components/hoverable_button/HoverableButton";
 import ipcSend from "api/ipcSend";
 import styles from "./InputPasswordModal.module.css";
 
@@ -24,12 +25,12 @@ function InputPasswordModal() {
     <AppContext.Consumer>
       {({ setPage, needPassword, setNeedPassword }) => {
         return (
-          <Modal
-            data={{ isOpen: needPassword }}
+          <SystemModal.Body
+            isOpen={needPassword}
             style={{
               content: {
                 width: "450px",
-                height: "220px",
+                height: "fit-content",
               },
             }}
           >
@@ -46,9 +47,10 @@ function InputPasswordModal() {
                   }}
                 />
               </div>
-              <div className={styles.buttonBox}>
-                <button
-                  className={`${styles.button} ${styles.submit}`}
+              <SystemModal.Footer order={"end"}>
+                <HoverableButton
+                  size={20.8}
+                  color="#4e73df"
                   onClick={() => {
                     if (password !== correct) {
                       setWrongPassword(true);
@@ -61,9 +63,10 @@ function InputPasswordModal() {
                   }}
                 >
                   확인
-                </button>
-                <button
-                  className={`${styles.button} ${styles.cancel}`}
+                </HoverableButton>
+                <HoverableButton
+                  size={20.8}
+                  color="#c72d1f"
                   onClick={() => {
                     setPassword("");
                     setWrongPassword(false);
@@ -72,10 +75,10 @@ function InputPasswordModal() {
                   }}
                 >
                   취소
-                </button>
-              </div>
+                </HoverableButton>
+              </SystemModal.Footer>
             </div>
-          </Modal>
+          </SystemModal.Body>
         );
       }}
     </AppContext.Consumer>

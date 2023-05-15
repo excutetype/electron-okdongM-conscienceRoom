@@ -1,14 +1,13 @@
-.categorySelection {
-  padding: 0px 17px 0px 17px;
+.text {
   background: none;
   border: none;
-  font-size: 2rem;
   font-family: "maplestoryBold";
   color: #3e3e3e;
+  outline: none;
   cursor: pointer;
 }
 
-.categorySelection:hover {
+.text:hover {
   color: #4e73df;
 }
 

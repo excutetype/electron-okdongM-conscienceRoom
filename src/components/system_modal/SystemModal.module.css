@@ -1,0 +1,23 @@
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerDesign {
+  border-radius: 5px 5px 0px 0px;
+  height: 8px;
+  background-color: #4e73df;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  padding: 10px 30px 10px 10px;
+  background-color: #f2f2f2;
+}
+
+.footer > *:nth-child(2) {
+  margin-left: 20px;
+}

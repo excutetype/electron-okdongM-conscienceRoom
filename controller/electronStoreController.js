@@ -1,31 +1,21 @@
 const { ipcMain } = require("electron");
 const electronStoreService = require("../service/electron_store/electronStoreService");
 
-ipcMain.on("electronStore-set-database-setting", (event, payload) => {
+ipcMain.on("electronStore-set", (event, payload) => {
   try {
-    electronStoreService.set.databaseSetting(JSON.parse(payload));
-    event.reply("reply-electronStore-set-database-setting", JSON.stringify({}));
+    const { key, value } = JSON.parse(payload);
+    electronStoreService.set(key, value);
+    event.reply("reply-electronStore-set", JSON.stringify({ success: true }));
   } catch (e) {
     throw e;
   }
 });
 
-ipcMain.on("electronStore-get-database-setting", (event) => {
+ipcMain.on("electronStore-get", (event, payload) => {
   try {
-    const setting = electronStoreService.get.databaseSetting();
-    event.reply(
-      "reply-electronStore-get-database-setting",
-      JSON.stringify(setting)
-    );
-  } catch (e) {
-    throw e;
-  }
-});
-
-ipcMain.on("electronStore-get-password", (event) => {
-  try {
-    const password = electronStoreService.get.password();
-    event.reply("reply-electronStore-get-password", JSON.stringify(password));
+    const { key, nonexistentKeyValue } = JSON.parse(payload);
+    const value = electronStoreService.get(key, nonexistentKeyValue);
+    event.reply("reply-electronStore-get", JSON.stringify(value));
   } catch (e) {
     throw e;
   }
