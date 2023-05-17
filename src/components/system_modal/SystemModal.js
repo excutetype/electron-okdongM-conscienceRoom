@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import styles from "./SystemModal.module.css";
 
-function Body({ isOpen, style, children }) {
+function Body({ style, children }) {
   const basicStyle = {
     content: {
       top: "50%",
@@ -15,7 +15,7 @@ function Body({ isOpen, style, children }) {
 
   return (
     <ReactModal
-      isOpen={isOpen}
+      isOpen={true}
       style={{ content: { ...basicStyle.content, ...style.content } }}
     >
       <div className={styles.body}>

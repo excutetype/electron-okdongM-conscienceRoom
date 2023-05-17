@@ -1,11 +1,16 @@
 import { useState } from "react";
 import ProductManagerPanel from "layout/admin/product_manager_panel/ProductManagerPanel";
 import Tool from "layout/admin/tool_panel/Tool";
-import ToolButton from "layout/admin/tool_panel/tool_button/ToolButton";
+import HoverableButton from "components/hoverable_button/HoverableButton";
 import ChangePasswordModal from "modal/admin/change_password/ChangePasswordModal";
 import AdminContext from "context/admin/AdminContext";
-
 import styles from "./Admin.module.css";
+
+const hoverableButtonStyle = {
+  width: "100%",
+  height: "65px",
+  fontSize: "2rem",
+};
 
 function Admin() {
   const [modal, setModal] = useState("");
@@ -15,29 +20,37 @@ function Admin() {
       <div className={styles.root}>
         <ProductManagerPanel />
         <Tool>
-          <ToolButton
-            style={{ key: "", color: "#4e73df" }}
-            data={{ name: "학생 페이지 관리" }}
-          />
-          <ToolButton
-            style={{ key: "", color: "#33C481" }}
-            data={{ name: "대출 목록 출력" }}
-          />
-          <ToolButton
-            style={{ color: "#858796" }}
-            data={{ key: "change-password", name: "비밀번호 변경" }}
-          />
+          <HoverableButton
+            style={{ ...hoverableButtonStyle, color: "#4e73df" }}
+          >
+            학생 페이지 관리
+          </HoverableButton>
+          <HoverableButton
+            style={{ ...hoverableButtonStyle, color: "#33c481" }}
+          >
+            대출 목록 출력
+          </HoverableButton>
+          <HoverableButton
+            style={{ ...hoverableButtonStyle, color: "#858796" }}
+            onClick={() => {
+              setModal("change-password");
+            }}
+          >
+            비밀번호 변경
+          </HoverableButton>
         </Tool>
-        {getModal(modal)}
+        {getModal(modal, () => {
+          setModal(false);
+        })}
       </div>
     </AdminContext.Provider>
   );
 }
 
-function getModal(kind) {
+function getModal(kind, close) {
   switch (kind) {
     case "change-password":
-      return <ChangePasswordModal />;
+      return <ChangePasswordModal close={close} />;
     default:
       return null;
   }

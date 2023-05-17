@@ -1,6 +1,6 @@
 import ReactModal from "react-modal";
 
-function Modal({ isOpen, style, children }) {
+function Modal({ style, children }) {
   const basicStyle = {
     content: {
       top: "50%",
@@ -14,7 +14,7 @@ function Modal({ isOpen, style, children }) {
 
   return (
     <ReactModal
-      isOpen={isOpen}
+      isOpen={true}
       style={{ content: { ...basicStyle.content, ...style.content } }}
     >
       {children}

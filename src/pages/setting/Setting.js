@@ -9,10 +9,17 @@ import HoverableButton from "components/hoverable_button/HoverableButton";
 import SuccessApplyModal from "modal/setting/SuccessApplyModal";
 import styles from "./Setting.module.css";
 
+const hoverableButtonStyle = {
+  fontSize: "20.8px",
+  color: "#4e73df",
+  width: "75px",
+  height: "35px",
+};
+
 function Setting() {
   const [settingPage, setSettingPage] = useState("general");
   const [settingValue, setSettingValue] = useState({});
-  const [isSuccessfulApply, setIsSuccessfulApply] = useState(false);
+  const [settingChange, setSettingChange] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -46,35 +53,34 @@ function Setting() {
         <SettingPage>{settingPageEnum[settingPage]}</SettingPage>
         <ApplyButtonBox>
           <HoverableButton
-            size={20.8}
-            color="#4e73df"
+            style={hoverableButtonStyle}
             onClick={() => {
               applyButtonClickHandler(
                 settingPage,
                 settingValue,
-                setIsSuccessfulApply
+                setSettingChange
               );
             }}
           >
             저장
           </HoverableButton>
         </ApplyButtonBox>
-        {isSuccessfulApply && (
-          <SuccessApplyModal setIsSuccessfulApply={setIsSuccessfulApply} />
+        {settingChange && (
+          <SuccessApplyModal
+            close={() => {
+              setSettingChange(false);
+            }}
+          />
         )}
       </div>
     </div>
   );
 }
 
-function applyButtonClickHandler(
-  settingPage,
-  settingValue,
-  setIsSuccessfulApply
-) {
+function applyButtonClickHandler(settingPage, settingValue, setSettingChange) {
   ipcSend("electronStore-set", { key: settingPage, value: settingValue }).then(
     () => {
-      setIsSuccessfulApply(true);
+      setSettingChange(true);
     }
   );
 }

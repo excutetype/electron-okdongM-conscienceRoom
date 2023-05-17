@@ -33,7 +33,7 @@ function createWindow() {
     const errorHandler = require("../error/handler");
     unhandled({ logger: errorHandler });
 
-    require("../config/mysql");
+    // setting require
     require("../controller/electronStoreController");
   });
 }

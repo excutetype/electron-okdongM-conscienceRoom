@@ -1,10 +1,10 @@
 import styles from "./FocusableInput.module.css";
 
-function FocusableInput({ length, fontSize, value, onChange }) {
+function FocusableInput({ style, value, onChange }) {
   return (
     <input
       className={styles.input}
-      style={{ fontSize, width: length }}
+      style={style}
       value={value}
       onChange={(e) => {
         onChange(e.target.value);

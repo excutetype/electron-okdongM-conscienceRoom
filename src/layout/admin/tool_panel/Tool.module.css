@@ -3,3 +3,7 @@
   width: 400px;
   padding-top: 10px;
 }
+
+.tool > *:nth-child(n + 2) {
+  margin-top: 20px;
+}

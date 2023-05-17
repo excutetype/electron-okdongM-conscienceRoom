@@ -1,16 +1,16 @@
 import { useState } from "react";
-import styles from "./FocusablePasswordInput.module.css";
+import styles from "./CheckablePasswordInput.module.css";
 import viewIcon from "images/page/setting/widget/password_input/view.png";
 import hideIcon from "images/page/setting/widget/password_input/hide.png";
 
-function FocusablePasswordInput({ style, value, onChange }) {
+function CheckablePasswordInput({ style, wrong, value, onChange }) {
   const [view, setView] = useState(false);
 
   return (
     <span className={styles.inputBox} style={{ width: style.width }}>
       <input
         type={view ? "input" : "password"}
-        className={styles.input}
+        className={`${styles.input} ${wrong.status ? styles.wrong : null}`}
         style={{ fontSize: style.fontSize }}
         value={value}
         onChange={(e) => {
@@ -26,8 +26,9 @@ function FocusablePasswordInput({ style, value, onChange }) {
           setView(!view);
         }}
       />
+      <div className={styles.wrongMessage}>{wrong.status && wrong.message}</div>
     </span>
   );
 }
 
-export default FocusablePasswordInput;
+export default CheckablePasswordInput;
