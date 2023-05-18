@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProductManagerPanel from "layout/admin/product_manager_panel/ProductManagerPanel";
 import Tool from "layout/admin/tool_panel/Tool";
 import HoverableButton from "components/hoverable_button/HoverableButton";
+import CreateProductModal from "modal/admin/create_product_modal/CreateProductModal";
 import ChangePasswordModal from "modal/admin/change_password/ChangePasswordModal";
 import AdminContext from "context/admin/AdminContext";
 import styles from "./Admin.module.css";
@@ -18,7 +19,11 @@ function Admin() {
   return (
     <AdminContext.Provider value={{ modal, setModal }}>
       <div className={styles.root}>
-        <ProductManagerPanel />
+        <ProductManagerPanel
+          openCreateProductModal={() => {
+            setModal("create-product");
+          }}
+        />
         <Tool>
           <HoverableButton
             style={{ ...hoverableButtonStyle, color: "#4e73df" }}
@@ -49,6 +54,8 @@ function Admin() {
 
 function getModal(kind, close) {
   switch (kind) {
+    case "create-product":
+      return <CreateProductModal close={close} />;
     case "change-password":
       return <ChangePasswordModal close={close} />;
     default:

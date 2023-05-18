@@ -34,7 +34,6 @@ function createWindow() {
     unhandled({ logger: errorHandler });
 
     // setting require
-    require("../controller/electronStoreController");
   });
 }
 
@@ -42,6 +41,13 @@ app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    db.close((err) => {
+      if (err) {
+        console.log("some thing wrong at close db", err);
+      } else {
+        console.log("db close");
+      }
+    });
     app.quit();
   }
 });
@@ -49,3 +55,6 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
+
+require("../controller");
+const db = require("../config/sqlite");

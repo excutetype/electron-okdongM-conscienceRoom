@@ -7,6 +7,8 @@ const ElectronStoreErrorHandler = require("./electronStoreErrorHandler");
 function errorHandler(e) {
   if (e instanceof DatabaseError.ConnectionError) {
     databaseErrorHandler.connection(e);
+  } else if (e instanceof DatabaseError.CRUDError) {
+    databaseErrorHandler.crud(e);
   } else if (e instanceof ElectronStoreError.setStoreError) {
     ElectronStoreErrorHandler.set(e);
   } else if (e instanceof ElectronStoreError.getStoreError) {

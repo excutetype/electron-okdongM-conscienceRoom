@@ -1,7 +1,7 @@
 import styles from "./ProductWidget.module.css";
 
-function ProductWidget({ data }) {
-  const fontSize = 40 - data.name.length * 2;
+function ProductWidget({ children, deleteProduct }) {
+  const fontSize = 40 - children.length * 2;
 
   return (
     <span className={styles.productWidget}>
@@ -9,9 +9,11 @@ function ProductWidget({ data }) {
         style={{ fontSize: `${fontSize < 24 ? 24 : fontSize}px` }}
         className={styles.name}
       >
-        {data.name}
+        {children}
       </div>
-      <button className={styles.deleteButton}>삭제</button>
+      <button className={styles.deleteButton} onClick={deleteProduct}>
+        삭제
+      </button>
     </span>
   );
 }

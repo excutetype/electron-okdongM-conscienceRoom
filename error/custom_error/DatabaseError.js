@@ -1,3 +1,5 @@
 class ConnectionError extends Error {}
 
-module.exports = { ConnectionError };
+class CRUDError extends Error {}
+
+module.exports = { ConnectionError, CRUDError };

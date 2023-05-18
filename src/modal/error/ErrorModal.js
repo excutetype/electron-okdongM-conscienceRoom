@@ -15,6 +15,9 @@ function ErrorModal() {
       case "database-connection":
         setMessage(errorMessageDict.database.connection);
         break;
+      case "database-crud":
+        setMessage(errorMessageDict.database.connection);
+        break;
       case "electronStore-set":
         setMessage(errorMessageDict.electronStore.set);
         break;
