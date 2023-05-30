@@ -56,5 +56,15 @@
   "devDependencies": {
     "electron": "^24.3.0",
     "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "extends": null,
+    "appId": "conscience-room-app",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extraResources": [
+      "model/DB.db"
+    ]
   }
 }
