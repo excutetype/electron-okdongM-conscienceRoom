@@ -1,12 +1,12 @@
 const webContents = require("../../public/main");
 
-const ElectronStoreErrorHandler = {
+const electronStoreErrorHandler = {
   set: (e) => {
-    webContents.send("error", "electronStore-set");
+    webContents.send("error", JSON.stringify("electronStore-set"));
   },
   get: (e) => {
-    webContents.send("error", "electronStore-get");
+    webContents.send("error", JSON.stringify("electronStore-get"));
   },
 };
 
-module.exports = ElectronStoreErrorHandler;
+module.exports = electronStoreErrorHandler;

@@ -14,20 +14,37 @@ const needAuthenticationPage = ["admin", "setting"];
 function App() {
   const [page, setPage] = useState("home");
   const [prevPage] = useState(usePrevious(page) ?? "home");
+  const [accessUser, setAccessUser] = useState("");
   const [needAuthentication, setNeedAuthentication] = useState(false);
-
-  console.log(page, prevPage);
 
   useEffect(() => {
     if (needAuthenticationPage.includes(page)) {
       setNeedAuthentication(true);
     }
+    if (page !== "user") {
+      setAccessUser("");
+    }
   }, [page]);
+
+  useEffect(() => {
+    if (accessUser) {
+      setPage("user");
+    }
+  }, [accessUser]);
 
   return (
     <div className={styles.App}>
       <Header page={page} setPage={setPage} />
-      <div className={styles.article}>{getPage(page)}</div>
+      <div className={styles.article}>
+        {
+          {
+            home: <Home setAccessUser={setAccessUser} />,
+            user: <User userId={accessUser} />,
+            admin: <Admin setAccessUser={setAccessUser} />,
+            setting: <Setting />,
+          }[page]
+        }
+      </div>
       <ErrorModal />
       {needAuthentication && (
         <NeedPasswordModal
@@ -41,20 +58,6 @@ function App() {
       )}
     </div>
   );
-}
-
-function getPage(currentPage) {
-  // eslint-disable-next-line default-case
-  switch (currentPage) {
-    case "home":
-      return <Home />;
-    case "user":
-      return <User />;
-    case "admin":
-      return <Admin />;
-    case "setting":
-      return <Setting />;
-  }
 }
 
 export default App;

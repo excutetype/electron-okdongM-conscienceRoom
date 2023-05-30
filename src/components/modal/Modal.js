@@ -8,6 +8,7 @@ function Modal({ style, children }) {
       transform: "translate(-50%, -50%)",
       padding: "0px",
       backgroundColor: "#FFFFFF",
+      borderRadius: "20px",
       boxShadow: "rgba(149, 157, 165, 0.4) 0px 0px 18px",
     },
   };

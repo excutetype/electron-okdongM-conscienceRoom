@@ -5,3 +5,7 @@
   margin-bottom: 25px;
   border-bottom: 1px solid #c5c5c5;
 }
+
+.filter > *:nth-child(n + 2) {
+  margin-left: 40px;
+}

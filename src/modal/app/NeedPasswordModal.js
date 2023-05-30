@@ -16,7 +16,7 @@ function NeedPasswordModal({ close, fail }) {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    setWrong((prev) => {
+    setWrong(() => {
       return { status: false };
     });
   }, [password]);

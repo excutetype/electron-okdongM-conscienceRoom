@@ -2,7 +2,7 @@ import HeaderButton from "./HeaderButton";
 import styles from "./Header.module.css";
 
 const kindOfButtonOnPage = {
-  home: ["setting", "admin"],
+  home: ["admin"],
   user: ["home"],
   admin: ["home"],
   setting: ["home"],

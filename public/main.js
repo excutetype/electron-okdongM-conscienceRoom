@@ -18,11 +18,7 @@ function createWindow() {
     autoHideMenuBar: true,
   });
 
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
+  win.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
 
   remote.enable(win.webContents);
 
@@ -33,7 +29,30 @@ function createWindow() {
     const errorHandler = require("../error/handler");
     unhandled({ logger: errorHandler });
 
-    // setting require
+    // serial port setting
+
+    const { SerialPort } = require("serialport");
+    const AppError = require("../error/custom_error/AppError");
+
+    try {
+      const serialport = new SerialPort({ path: "COM4", baudRate: 9600 }, (err) => {
+        if (err) {
+          throw new AppError.OpenSerialportError(err);
+        }
+      });
+      serialport.on("open", (err) => {
+        if (err) {
+          throw new AppError.OpenSerialportError(err);
+        }
+
+        serialport.on("data", async (data) => {
+          const cardId = data.toString("utf8").replace("\r", "");
+          win.webContents.send("app-scanning-card", JSON.stringify({ userId: cardId }));
+        });
+      });
+    } catch (e) {
+      return e;
+    }
   });
 }
 

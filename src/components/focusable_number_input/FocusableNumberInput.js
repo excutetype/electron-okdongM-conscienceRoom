@@ -1,11 +1,12 @@
 import styles from "./FocusableNumberInput.module.css";
 
-function FocusableNumberInput({ length, fontSize, value, onChange }) {
+function FocusableNumberInput({ style, placeholder, value, onChange }) {
   return (
     <input
       type="number"
+      placeholder={placeholder}
       className={styles.input}
-      style={{ fontSize, width: length }}
+      style={style}
       value={value}
       onChange={(e) => {
         onChange(e.target.value);

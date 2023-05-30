@@ -1,9 +1,9 @@
 import styles from "./Identifier.module.css";
 
-function Identifier({ data }) {
+function Identifier({ grade, class_NM, name }) {
   return (
     <span className={styles.identifier}>
-      {data.grade}학년 {data.class}반 {data.name}
+      {grade}학년 {class_NM}반 {name}
     </span>
   );
 }

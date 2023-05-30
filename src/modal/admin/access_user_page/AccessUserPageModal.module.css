@@ -1,4 +1,4 @@
-.inputPasswordModal {
+.accessuserPageModal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,24 +12,31 @@
   width: 90%;
   display: flex;
   justify-content: left;
-  margin-top: 5px;
+  margin: 5px 0px 10px 0px;
   font-family: "maplestoryBold";
   font-size: 1.7rem;
 }
 
-.inputBox {
+.article {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 70px;
 }
 
-.invalidMSG {
+.inputBox > *:nth-child(n + 2) {
+  margin-left: 25px;
+}
+
+.wrongMessageBox {
+  display: flex;
+  justify-content: flex-start;
   width: 100%;
-  padding-left: 5px;
+  height: 32px;
+  margin-top: 10px;
   color: #c72d1f;
   font-family: "maplestoryLight";
+  font-size: 1.2rem;
 }
 
 .buttonBox {

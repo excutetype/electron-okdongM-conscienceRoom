@@ -1,8 +1,9 @@
 import styles from "./FocusableInput.module.css";
 
-function FocusableInput({ style, value, onChange }) {
+function FocusableInput({ style, placeholder, value, onChange }) {
   return (
     <input
+      placeholder={placeholder}
       className={styles.input}
       style={style}
       value={value}

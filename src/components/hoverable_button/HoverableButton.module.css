@@ -3,3 +3,7 @@
   font-family: "maplestoryLight";
   cursor: pointer;
 }
+
+.disabled {
+  background-color: #dfdfdf !important;
+}

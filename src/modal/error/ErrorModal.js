@@ -7,26 +7,37 @@ import errorMessageDict from "./errorMessageDict";
 
 function ErrorModal() {
   const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({});
 
   ipcOn("error", (kindOfError) => {
-    setShowModal(true);
+    let message = null;
     switch (kindOfError) {
       case "database-connection":
-        setMessage(errorMessageDict.database.connection);
+        message = errorMessageDict.database.connection;
         break;
       case "database-crud":
-        setMessage(errorMessageDict.database.connection);
+        message = errorMessageDict.database.crud;
         break;
       case "electronStore-set":
-        setMessage(errorMessageDict.electronStore.set);
+        message = errorMessageDict.electronStore.set;
         break;
       case "electronStore-get":
-        setMessage(errorMessageDict.electronStore.get);
+        message = errorMessageDict.electronStore.get;
+        break;
+      case "app-open-serialport":
+        message = errorMessageDict.app.openSerialport;
+        break;
+      case "app-print-Excel":
+        message = errorMessageDict.app.printExcel;
         break;
       default:
-        setMessage(errorMessageDict.uncaught);
+        message = errorMessageDict.uncaught;
+        break;
     }
+    setMessage(() => {
+      return message;
+    });
+    setShowModal(true);
   });
 
   return (
@@ -50,7 +61,7 @@ function ErrorModal() {
               <div className={styles.messageBox}>
                 <div className={styles.titleMessage}>{message?.title}</div>
                 <div className={styles.descriptionMesage}>
-                  {message?.description.map((description, index) => {
+                  {message?.descriptions.map((description, index) => {
                     return (
                       <span key={index}>
                         {`${index + 1}. ${description}`}

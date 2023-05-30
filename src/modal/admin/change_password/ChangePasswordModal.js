@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "components/modal/Modal";
 import CheckablePasswordInput from "components/checkable_password_input/CheckablePasswordInput";
 import HoverableButton from "components/hoverable_button/HoverableButton";
@@ -18,8 +18,6 @@ const hoverableButtonStyle = {
 function ChangePasswordModal({ close }) {
   const [inputValue, setInputValue] = useState("");
   const [wrong, setWrong] = useState({});
-
-  console.log(inputValue);
 
   return (
     <Modal
@@ -60,10 +58,7 @@ function ChangePasswordModal({ close }) {
           >
             확인
           </HoverableButton>
-          <HoverableButton
-            style={{ ...hoverableButtonStyle, color: "#c72d1f" }}
-            onClick={close}
-          >
+          <HoverableButton style={{ ...hoverableButtonStyle, color: "#c72d1f" }} onClick={close}>
             취소
           </HoverableButton>
         </div>
@@ -98,7 +93,6 @@ function isValid(value, prevPassword) {
   }
 
   if (value === prevPassword) {
-    console.log("same");
     return { status: false, message: "* 이전 비밀번호와 동입합니다" };
   }
 

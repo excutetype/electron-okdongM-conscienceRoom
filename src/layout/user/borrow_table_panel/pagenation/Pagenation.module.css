@@ -2,15 +2,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
+  margin: 12px 0px 40px 0px;
 }
 
 .pageSelection {
-  margin: 0px 0px 40px 30px;
   background: none;
   border: none;
   font-size: 24px;
   font-family: "maplestoryLight";
   color: #555555;
   cursor: pointer;
+}
+
+.selected {
+  color: #4e73df;
+}
+
+.pagenation > *:nth-child(n + 2) {
+  margin-left: 25px;
+}
+
+.pageButton {
+  border: none;
+  background: none;
+  font-family: "maplestoryLight";
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.pageSelection:checked,
+.pageButton:checked {
+  outline: none;
 }

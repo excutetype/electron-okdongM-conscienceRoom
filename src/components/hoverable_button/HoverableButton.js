@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./HoverableButton.module.css";
 
-function HoverableButton({ style, onClick, children }) {
+function HoverableButton({ style, onClick, disabled = false, children }) {
   const normalStyle = {
     ...style,
     backgroundColor: "#ffffff",
@@ -18,8 +18,9 @@ function HoverableButton({ style, onClick, children }) {
 
   return (
     <button
-      className={styles.button}
+      className={`${styles.button} ${disabled ? styles.disabled : null}`}
       style={isHovered ? hoverStyle : normalStyle}
+      disabled={disabled}
       onClick={onClick}
       onMouseOver={() => {
         setIsHoverd(true);
